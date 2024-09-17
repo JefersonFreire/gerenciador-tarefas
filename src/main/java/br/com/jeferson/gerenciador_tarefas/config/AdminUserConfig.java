@@ -1,9 +1,9 @@
 package br.com.jeferson.gerenciador_tarefas.config;
 
 import br.com.jeferson.gerenciador_tarefas.entity.Role;
-import br.com.jeferson.gerenciador_tarefas.entity.User;
+import br.com.jeferson.gerenciador_tarefas.entity.Usuario;
 import br.com.jeferson.gerenciador_tarefas.repository.RoleRepository;
-import br.com.jeferson.gerenciador_tarefas.repository.UserRepository;
+import br.com.jeferson.gerenciador_tarefas.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -14,12 +14,12 @@ import java.util.*;
 @Configuration
 public class AdminUserConfig implements CommandLineRunner {
 
-    private final UserRepository userRepository;
+    private final UsuarioRepository userRepository;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final RoleRepository roleRepository;
 
-    public AdminUserConfig(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, RoleRepository roleRepository) {
+    public AdminUserConfig(UsuarioRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.roleRepository = roleRepository;
@@ -47,9 +47,10 @@ public class AdminUserConfig implements CommandLineRunner {
                     System.out.println("admin já existe");
                 },
                 () -> {
-                    var user = new User();
+                    var user = new Usuario();
                     user.setUsername("admin");
                     user.setPassword(bCryptPasswordEncoder.encode("123"));
+                    user.setEmail("admin@email.com");
                     user.setRoles(Set.of(finalRoleAdmin));
                     userRepository.save(user);
                 }

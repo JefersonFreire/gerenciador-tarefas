@@ -3,7 +3,7 @@ package br.com.jeferson.gerenciador_tarefas.controller;
 import br.com.jeferson.gerenciador_tarefas.controller.dto.LoginRequest;
 import br.com.jeferson.gerenciador_tarefas.controller.dto.LoginResponse;
 import br.com.jeferson.gerenciador_tarefas.entity.Role;
-import br.com.jeferson.gerenciador_tarefas.repository.UserRepository;
+import br.com.jeferson.gerenciador_tarefas.repository.UsuarioRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,12 +22,12 @@ public class TokenController {
 
     private final JwtEncoder jwtEncoder;
 
-    private final UserRepository userRepository;
+    private final UsuarioRepository userRepository;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
-    public TokenController(JwtEncoder jwtEncoder, UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public TokenController(JwtEncoder jwtEncoder, UsuarioRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.jwtEncoder = jwtEncoder;
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
